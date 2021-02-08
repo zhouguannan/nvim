@@ -16,13 +16,16 @@
 " ===
 " === System
 " ===
-"set clipboard=unnamedplus
+let mapleader="k"
+set clipboard=unnamedplus
 let &t_ut=''
 set autochdir
-
+autocmd FileType json syntax match Comment +\/\/.\+$+
+autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2
 " ===
 " === Other useful stuff
 " ===
+set ma
 " Open a new instance of st with the cwd
 nnoremap \t :tabe<CR>:-tabmove<CR>:term sh -c 'st'<CR><C-\><C-N>:q<CR>
 
@@ -182,7 +185,7 @@ Plug 'majutsushi/tagbar', { 'on': 'TagbarOpenAutoClose' }
 Plug 'w0rp/ale'
 
 " Auto Complete
-" Plug 'Valloric/YouCompleteMe'
+"Plug 'Valloric/YouCompleteMe'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'davidhalter/jedi-vim'
 
@@ -199,6 +202,7 @@ Plug 'itchyny/vim-cursorword'
 Plug 'tmhedberg/SimpylFold'
 Plug 'lambdalisue/suda.vim'
 " Git
+Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 Plug 'rhysd/conflict-marker.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
@@ -237,7 +241,7 @@ Plug 'tpope/vim-surround' " type ysks' to wrap the word with '' or type cs'` to 
 Plug 'godlygeek/tabular' " type ;Tabularize /= to align the =
 Plug 'gcmt/wildfire.vim' " in Visual mode, type i' to select all text in '', or type i) i] i} ip
 Plug 'scrooloose/nerdcommenter' " in <space>cc to comment a line
-
+"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 " Dependencies
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'kana/vim-textobj-user'
@@ -300,10 +304,16 @@ Plug 'cohama/agit.vim'
 
 " Autoformat
 Plug 'Chiel92/vim-autoformat'
-
+if has('nvim')
+  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/defx.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 " Tex
 " Plug 'lervag/vimtex'
-
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 " CSharp
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'ctrlpvim/ctrlp.vim' , { 'for': ['cs', 'vim-plug'] } " omnisharp-vim dependency
@@ -322,31 +332,36 @@ Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', '
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'posva/vim-vue'
 Plug 'liuchengxu/vim-clap'
-
+Plug 'kristijanhusak/defx-icons'
 " Go
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
-Plug 'glepnir/dashboard-nvim'
+"Plug 'glepnir/dashboard-nvim'
 " Python
-" Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
+"
+Plug 'mhinz/vim-startify'
+"" Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
 Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-plug'] }
 "Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
 "Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
 Plug 'tweekmonster/braceless.vim', { 'for' :['python', 'vim-plug'] }
-
+Plug 'Shougo/defx.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
 " Flutter
 Plug 'dart-lang/dart-vim-plugin'
-
+"Plug 'JamshedVesuna/vim-markdown-preview'
 " Markdown
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': ['text', 'markdown', 'vim-plug'] }
 Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown', 'vim-plug'] }
 Plug 'dkarter/bullets.vim'
-
+Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 " Other filetypes
 Plug 'cespare/vim-toml', { 'for': ['toml', 'vim-plug'] }
 Plug 'jceb/vim-orgmode', {'for': ['vim-plug', 'org']}
-
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 " Editor Enhancement
 "Plug 'Raimondi/delimitMate'
 Plug 'jiangmiao/auto-pairs'
@@ -367,7 +382,7 @@ Plug 'theniceboy/argtextobj.vim'
 Plug 'rhysd/clever-f.vim'
 Plug 'chrisbra/NrrwRgn'
 Plug 'AndrewRadev/splitjoin.vim'
-
+Plug 'jszakmeister/markdown2ctags'
 " For general writing
 " Plug 'junegunn/goyo.vim'
 "Plug 'reedes/vim-wordy'
@@ -388,7 +403,7 @@ Plug 'majutsushi/tagbar', { 'on': 'TagbarOpenAutoClose' }
 Plug 'w0rp/ale'
 
 " Auto Complete
-Plug 'Valloric/YouCompleteMe'
+"Plug 'Valloric/YouCompleteMe'
 
 " Undo Tree
 Plug 'mbbill/undotree/'
@@ -410,7 +425,7 @@ Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
 Plug 'gko/vim-coloresque', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 Plug 'pangloss/vim-javascript', { 'for' :['javascript', 'vim-plug'] }
 Plug 'mattn/emmet-vim'
-
+Plug 'dhruvasagar/vim-table-mode'
 " Python
 Plug 'vim-scripts/indentpython.vim'
 Plug 'vim-scripts/taglist.vim'
@@ -422,24 +437,26 @@ Plug 'vimwiki/vimwiki'
 " Bookmarks
 Plug 'kshenoy/vim-signature'
 
-" Other useful utilities
 Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/goyo.vim' " distraction free writing mode
 Plug 'tpope/vim-surround' " type ysks' to wrap the word with '' or type cs'` to change 'word' to `word`
 Plug 'godlygeek/tabular' " type ;Tabularize /= to align the =
 Plug 'gcmt/wildfire.vim' " in Visual mode, type i' to select all text in '', or type i) i] i} ip
 Plug 'scrooloose/nerdcommenter' " in <space>cc to comment a line
-
+Plug 'iamcco/markdown-preview.nvim'
 " Dependencies
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'kana/vim-textobj-user'
 Plug 'fadein/vim-FIGlet'
 " Bookmarks
 " Plug 'MattesGroeger/vim-bookmarks'
-
+Plug 'majutsushi/tagbar'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-easytags'
+Plug 'jszakmeister/markdown2ctags'
 " Find & Replace
 Plug 'brooth/far.vim', { 'on': ['F', 'Far', 'Fardo'] }
-
+Plug 'stevearc/vim-arduino'
 " Documentation
 "Plug 'KabbAmine/zeavim.vim' " <LEADER>z to find doc
 
@@ -459,7 +476,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'luochen1990/rainbow'
 "Plug 'mg979/vim-xtabline'
 Plug 'wincent/terminus'
-
+Plug 'ferrine/md-img-paste.vim'
 " Other useful utilities
 Plug 'lambdalisue/suda.vim' " do stuff like :sudowrite
 " Plug 'makerj/vim-pdf'
@@ -473,17 +490,25 @@ Plug 'lambdalisue/suda.vim' " do stuff like :sudowrite
 
 call plug#end()
 set re=0
-
+autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
+" there are some defaults for image directory and image name, you can change them
+" let g:mdip_imgdir = 'img'
+" let g:mdip_imgname = 'image'
 " experimental
 set lazyredraw
 "set regexpengine=1
 map aa :undo<CR>
 " ===
+" Use this option to define the table corner character
+let g:table_mode_corner = '|'
+" Use this option to define the delimiter which used by
+let g:table_mode_delimiter = ' '
 " === Dress up my vim
 map ff :FZF<CR>
 map lg :terminal lazygit<CR>
 map file :terminal ranger<CR>
 " ===
+let g:instant_markdown_autostart = 0
 set termguicolors " enable true colors support
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 "set background=dark
@@ -493,6 +518,7 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 "let g:one_allow_italics = 1
 let g:mkdp_auto_open = 1
 "color dracula
+let vim_markdown_preview_hotkey='<C-m>'
 "color one
 color deus
 "colorscheme space_vim_theme
@@ -508,7 +534,9 @@ hi NonText ctermfg=gray guifg=grey10
 
 " ===================== Start of Plugin Settings =====================
 
-
+nmap <C-s> <Plug>MarkdownPreview
+nmap <M-s> <Plug>MarkdownPreviewStop
+nmap <C-p> <Plug>MarkdownPreviewToggle
 " ===
 " === vim-airline
 " ===
@@ -670,6 +698,9 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gr <Plug>(coc-references)
 nmap <leader>rn <Plug>(coc-rename)
 "nmap tt :CocCommand explorer<CR>
+
+map vista :Vista<CR>
+
 map tt :NERDTreeToggle<CR>
 let NERDTreeMapOpenExpl = ""
 let NERDTreeMapUpdir = ""
@@ -722,6 +753,71 @@ let g:instant_markdown_autostart = 0
 " let g:instant_markdown_mathjax = 1
 let g:instant_markdown_autoscroll = 1
 
+autocmd FileType defx call s:defx_my_settings()
+	function! s:defx_my_settings() abort
+	  " Define mappings
+	  nnoremap <silent><buffer><expr> <CR>
+	  \ defx#do_action('open')
+	  nnoremap <silent><buffer><expr> c
+	  \ defx#do_action('copy')
+	  nnoremap <silent><buffer><expr> m
+	  \ defx#do_action('move')
+	  nnoremap <silent><buffer><expr> p
+	  \ defx#do_action('paste')
+	  nnoremap <silent><buffer><expr> l
+	  \ defx#do_action('open')
+	  nnoremap <silent><buffer><expr> E
+	  \ defx#do_action('open', 'vsplit')
+	  nnoremap <silent><buffer><expr> P
+	  \ defx#do_action('preview')
+	  nnoremap <silent><buffer><expr> o
+	  \ defx#do_action('open_tree', 'toggle')
+	  nnoremap <silent><buffer><expr> K
+	  \ defx#do_action('new_directory')
+	  nnoremap <silent><buffer><expr> N
+	  \ defx#do_action('new_file')
+	  nnoremap <silent><buffer><expr> M
+	  \ defx#do_action('new_multiple_files')
+	  nnoremap <silent><buffer><expr> C
+	  \ defx#do_action('toggle_columns',
+	  \                'mark:indent:icon:filename:type:size:time')
+	  nnoremap <silent><buffer><expr> S
+	  \ defx#do_action('toggle_sort', 'time')
+	  nnoremap <silent><buffer><expr> d
+	  \ defx#do_action('remove')
+	  nnoremap <silent><buffer><expr> r
+	  \ defx#do_action('rename')
+	  nnoremap <silent><buffer><expr> !
+	  \ defx#do_action('execute_command')
+	  nnoremap <silent><buffer><expr> x
+	  \ defx#do_action('execute_system')
+	  nnoremap <silent><buffer><expr> yy
+	  \ defx#do_action('yank_path')
+	  nnoremap <silent><buffer><expr> .
+	  \ defx#do_action('toggle_ignored_files')
+	  nnoremap <silent><buffer><expr> ;
+	  \ defx#do_action('repeat')
+	  nnoremap <silent><buffer><expr> h
+	  \ defx#do_action('cd', ['..'])
+	  nnoremap <silent><buffer><expr> ~
+	  \ defx#do_action('cd')
+	  nnoremap <silent><buffer><expr> q
+	  \ defx#do_action('quit')
+	  nnoremap <silent><buffer><expr> <Space>
+	  \ defx#do_action('toggle_select') . 'j'
+	  nnoremap <silent><buffer><expr> *
+	  \ defx#do_action('toggle_select_all')
+	  nnoremap <silent><buffer><expr> j
+	  \ line('.') == line('$') ? 'gg' : 'j'
+	  nnoremap <silent><buffer><expr> k
+	  \ line('.') == 1 ? 'G' : 'k'
+	  nnoremap <silent><buffer><expr> <C-l>
+	  \ defx#do_action('redraw')
+	  nnoremap <silent><buffer><expr> <C-g>
+	  \ defx#do_action('print')
+	  nnoremap <silent><buffer><expr> cd
+	  \ defx#do_action('change_vim_cwd')
+	endfunction
 
 " ===
 " === vim-focus
@@ -1100,12 +1196,49 @@ let g:EasyMotion_smartcase = 1
 " ===
 map <LEADER>gy :Goyo<CR>
 
+let g:mkdp_path_to_chrome = "google-chrome-stable"
+    " Path to the chrome or the command to open chrome (or other modern browsers).
+    " If set, g:mkdp_browserfunc would be ignored.
 
+    let g:mkdp_browserfunc = 'MKDP_browserfunc_default'
+    " Callback Vim function to open browser, the only parameter is the url to open.
+
+    let g:mkdp_auto_start = 1
+    " Set to 1, Vim will open the preview window on entering the Markdown
+    " buffer.
+
+    let g:mkdp_auto_open = 1
+    " Set to 1, Vim will automatically open the preview window when you edit a
+    " Markdown file.
+
+    let g:mkdp_auto_close = 1
+    " Set to 1, Vim will automatically close the current preview window when
+    " switching from one Markdown buffer to another.
+
+    let g:mkdp_refresh_slow = 0
+    " Set to 1, Vim will just refresh Markdown when saving the buffer or
+    " leaving from insert mode. With default 0, it will automatically refresh
+    " Markdown as you edit or move the cursor.
+
+    let g:mkdp_command_for_global = 0
+    " Set to 1, the MarkdownPreview command can be used for all files,
+    " by default it can only be used in Markdown files.
+
+    let g:mkdp_open_to_the_world = 0
+    " Set to 1, the preview server will be available to others in your network.
+    " By default, the server only listens on localhost (127.0.0.1).
 " ===
 " === jsx
 " ===
 let g:vim_jsx_pretty_colorful_config = 1
-
+" for normal mode
+nmap <silent> <F8> <Plug>MarkdownPreview
+" for insert mode
+imap <silent> <F8> <Plug>MarkdownPreview
+" for normal mode
+nmap <silent> <F9> <Plug>StopMarkdownPreview
+" for insert mode
+imap <silent> <F9> <Plug>StopMarkdownPreview
 
 " ===
 " === fastfold
@@ -1567,7 +1700,8 @@ let g:SignatureMap = {
 " ===
 let g:undotree_DiffAutoOpen = 0
 map L :UndotreeToggle<CR>
-
+map J :bn<CR>
+map K :bp<CR>
 " for normal mode
 nmap <silent> <F8> <Plug>MarkdownPreview
 " for insert mode
@@ -1576,7 +1710,234 @@ imap <silent> <F8> <Plug>MarkdownPreview
 nmap <silent> <F9> <Plug>StopMarkdownPreview
 " for insert mode
 imap <silent> <F9> <Plug>StopMarkdownPreview
-color dracula
+"color dracula
 map sudo :SudaRead<CR>
 map tag :TagbarOpenAutoClose<CR>
 let g:airline#extensions#tabline#enabled = 1
+map ss :redo<CR>
+map 16 :%!xxd<CR>
+autocmd FileType defx call s:defx_my_settings()
+	function! s:defx_my_settings() abort
+	  " Define mappings
+	  nnoremap <silent><buffer><expr> <CR>
+	  \ defx#do_action('open')
+	  nnoremap <silent><buffer><expr> c
+	  \ defx#do_action('copy')
+	  nnoremap <silent><buffer><expr> m
+	  \ defx#do_action('move')
+	  nnoremap <silent><buffer><expr> p
+	  \ defx#do_action('paste')
+	  nnoremap <silent><buffer><expr> l
+	  \ defx#do_action('open')
+	  nnoremap <silent><buffer><expr> E
+	  \ defx#do_action('open', 'vsplit')
+	  nnoremap <silent><buffer><expr> P
+	  \ defx#do_action('preview')
+	  nnoremap <silent><buffer><expr> o
+	  \ defx#do_action('open_tree', 'toggle')
+	  nnoremap <silent><buffer><expr> K
+	  \ defx#do_action('new_directory')
+	  nnoremap <silent><buffer><expr> N
+	  \ defx#do_action('new_file')
+	  nnoremap <silent><buffer><expr> M
+	  \ defx#do_action('new_multiple_files')
+	  nnoremap <silent><buffer><expr> C
+	  \ defx#do_action('toggle_columns',
+	  \                'mark:indent:icon:filename:type:size:time')
+	  nnoremap <silent><buffer><expr> S
+	  \ defx#do_action('toggle_sort', 'time')
+	  nnoremap <silent><buffer><expr> d
+	  \ defx#do_action('remove')
+	  nnoremap <silent><buffer><expr> r
+	  \ defx#do_action('rename')
+	  nnoremap <silent><buffer><expr> !
+	  \ defx#do_action('execute_command')
+	  nnoremap <silent><buffer><expr> x
+	  \ defx#do_action('execute_system')
+	  nnoremap <silent><buffer><expr> yy
+	  \ defx#do_action('yank_path')
+	  nnoremap <silent><buffer><expr> .
+	  \ defx#do_action('toggle_ignored_files')
+	  nnoremap <silent><buffer><expr> ;
+	  \ defx#do_action('repeat')
+	  nnoremap <silent><buffer><expr> h
+	  \ defx#do_action('cd', ['..'])
+	  nnoremap <silent><buffer><expr> ~
+	  \ defx#do_action('cd')
+	  nnoremap <silent><buffer><expr> q
+	  \ defx#do_action('quit')
+	  nnoremap <silent><buffer><expr> <Space>
+	  \ defx#do_action('toggle_select') . 'j'
+	  nnoremap <silent><buffer><expr> *
+	  \ defx#do_action('toggle_select_all')
+	  nnoremap <silent><buffer><expr> j
+	  \ line('.') == line('$') ? 'gg' : 'j'
+	  nnoremap <silent><buffer><expr> k
+	  \ line('.') == 1 ? 'G' : 'k'
+	  nnoremap <silent><buffer><expr> <C-l>
+	  \ defx#do_action('redraw')
+	  nnoremap <silent><buffer><expr> <C-g>
+	  \ defx#do_action('print')
+	  nnoremap <silent><buffer><expr> cd
+	  \ defx#do_action('change_vim_cwd')
+	endfunction
+" set to 1, nvim will open the preview window after entering the markdown buffer
+" default: 0
+let g:mkdp_auto_start = 1
+
+" set to 1, the nvim will auto close current preview window when change
+" from markdown buffer to another buffer
+" default: 1
+let g:mkdp_auto_close = 1
+
+" set to 1, the vim will refresh markdown when save the buffer or
+" leave from insert mode, default 0 is auto refresh markdown as you edit or
+" move the cursor
+" default: 0
+let g:mkdp_refresh_slow = 0
+
+" set to 1, the MarkdownPreview command can be use for all files,
+" by default it can be use in markdown file
+" default: 0
+let g:mkdp_command_for_global = 1
+
+" set to 1, preview server available to others in your network
+" by default, the server listens on localhost (127.0.0.1)
+" default: 0
+let g:mkdp_open_to_the_world = 0
+
+" use custom IP to open preview page
+" useful when you work in remote vim and preview on local browser
+" more detail see: https://github.com/iamcco/markdown-preview.nvim/pull/9
+" default empty
+let g:mkdp_open_ip = ''
+
+" specify browser to open preview page
+" default: ''
+let g:mkdp_browser = ''
+
+" set to 1, echo preview page url in command line when open preview page
+" default is 0
+let g:mkdp_echo_preview_url = 0
+
+" a custom vim function name to open preview page
+" this function will receive url as param
+" default is empty
+let g:mkdp_browserfunc = ''
+
+" options for markdown render
+" mkit: markdown-it options for render
+" katex: katex options for math
+" uml: markdown-it-plantuml options
+" maid: mermaid options
+" disable_sync_scroll: if disable sync scroll, default 0
+" sync_scroll_type: 'middle', 'top' or 'relative', default value is 'middle'
+"   middle: mean the cursor position alway show at the middle of the preview page
+"   top: mean the vim top viewport alway show at the top of the preview page
+"   relative: mean the cursor position alway show at the relative positon of the preview page
+" hide_yaml_meta: if hide yaml metadata, default is 1
+" sequence_diagrams: js-sequence-diagrams options
+" content_editable: if enable content editable for preview page, default: v:false
+" disable_filename: if disable filename header for preview page, default: 0
+let g:mkdp_preview_options = {
+    \ 'mkit': {},
+    \ 'katex': {},
+    \ 'uml': {},
+    \ 'maid': {},
+    \ 'disable_sync_scroll': 0,
+    \ 'sync_scroll_type': 'middle',
+    \ 'hide_yaml_meta': 1,
+    \ 'sequence_diagrams': {},
+    \ 'flowchart_diagrams': {},
+    \ 'content_editable': v:false,
+    \ 'disable_filename': 0
+    \ }
+
+" use a custom markdown style must be absolute path
+" like '/Users/username/markdown.css' or expand('~/markdown.css')
+let g:mkdp_markdown_css = ''
+
+" use a custom highlight style must absolute path
+" like '/Users/username/highlight.css' or expand('~/highlight.css')
+let g:mkdp_highlight_css = ''
+
+" use a custom port to start server or random for empty
+let g:mkdp_port = ''
+
+" preview page title
+" ${name} will be replace with the file name
+let g:mkdp_page_title = '「${name}」'
+
+" recognized filetypes
+" these filetypes will have MarkdownPreview... commands
+let g:mkdp_filetypes = ['markdown']
+let g:mkdp_echo_preview_url = 1
+let g:mkdp_browser = 'chromium'
+let g:instant_markdown_autostart = 1
+function! s:isAtStartOfLine(mapping)
+  let text_before_cursor = getline('.')[0 : col('.')-1]
+  let mapping_pattern = '\V' . escape(a:mapping, '\')
+  let comment_pattern = '\V' . escape(substitute(&l:commentstring, '%s.*$', '', ''), '\')
+  return (text_before_cursor =~? '^' . ('\v(' . comment_pattern . '\v)?') . '\s*\v' . mapping_pattern . '\v$')
+endfunction
+
+inoreabbrev <expr> <bar><bar>
+          \ <SID>isAtStartOfLine('\|\|') ?
+          \ '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
+inoreabbrev <expr> __
+          \ <SID>isAtStartOfLine('__') ?
+          \ '<c-o>:silent! TableModeDisable<cr>' : '__'
+map tb :TableModeToggle<CR>
+" Add support for markdown files in tagbar.
+let g:tagbar_type_markdown = {
+    \ 'ctagstype': 'markdown',
+    \ 'ctagsbin' : '~/.config/nvim/plugged/markdown2ctags/markdown2ctags.py',
+    \ 'ctagsargs' : '-f - --sort=yes --sro=»',
+    \ 'kinds' : [
+        \ 's:sections',
+        \ 'i:images'
+    \ ],
+    \ 'sro' : '»',
+    \ 'kind2scope' : {
+        \ 's' : 'section',
+    \ },
+    \ 'sort': 0,
+\ }
+
+" Add syntax rule
+let g:markdown_quote_syntax_filetypes = {
+        \ "coffee" : {
+        \   "start" : "coffee",
+        \},
+        \ "css" : {
+        \   "start" : "\\%(css\\|scss\\)",
+        \},
+        \ "mustache" : {
+        \   "start" : "mustache",
+        \},
+        \ "haml" : {
+        \   "start" : "haml",
+        \},
+  \}
+
+" 'start' and 'end' is vim regular expression.
+" need to care backslash.
+
+" Add code blocks
+
+
+
+
+
+" Each codeblock is defined as:
+"
+"    'codeblock[0].filetype.codeblock[1]<code lines>codeblock[2]'
+"
+" Above example is for the liquid highlight tag. (It is already included by default.)
+"    {% highlight vim %}
+"    any codes
+"    ...
+"    {% endhighlight %}
+
+" Add other file types in which quote syntax should be on.
+let g:markdown_quote_syntax_on_filetypes = ['text']
