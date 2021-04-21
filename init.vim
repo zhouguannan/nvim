@@ -162,7 +162,7 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 
 
 call plug#begin('~/.config/nvim/plugged')
-
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " Calculator
 Plug 'theniceboy/vim-calc'
 " Pretty Dress
@@ -242,6 +242,7 @@ Plug 'godlygeek/tabular' " type ;Tabularize /= to align the =
 Plug 'gcmt/wildfire.vim' " in Visual mode, type i' to select all text in '', or type i) i] i} ip
 Plug 'scrooloose/nerdcommenter' " in <space>cc to comment a line
 "Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " Dependencies
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'kana/vim-textobj-user'
@@ -249,6 +250,76 @@ Plug 'fadein/vim-FIGlet'
 " Practical
 Plug 'SpringHan/vim-focus'
 
+    " Better Comments
+    Plug 'tpope/vim-commentary'
+    " Surround
+    Plug 'tpope/vim-surround'
+    " Have the file system follow you around
+    Plug 'airblade/vim-rooter'
+    " Cool Icons
+    Plug 'ryanoasis/vim-devicons'
+    " Auto pairs for '(' '[' '{'
+    Plug 'jiangmiao/auto-pairs'
+    " Closetags
+    Plug 'alvan/vim-closetag'
+    " Syntax higlighting
+    Plug 'sheerun/vim-polyglot'
+    " Plug 'yuezk/vim-js'
+    Plug 'maxmellon/vim-jsx-pretty'
+    " Themes
+    Plug 'morhetz/gruvbox'
+    Plug 'ayu-theme/ayu-vim'
+    Plug 'kaicataldo/material.vim'
+    Plug 'NLKNguyen/papercolor-theme'
+    Plug 'tomasiser/vim-code-dark'
+    Plug 'arcticicestudio/nord-vim'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'crusoexia/vim-monokai'
+    Plug 'phanviet/vim-monokai-pro'
+    Plug 'patstockwell/vim-monokai-tasty'
+    " Intellisense
+    if !exists('g:vscode')
+         Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    endif
+    "Async stuff
+    Plug 'skywind3000/asynctasks.vim'
+    Plug 'skywind3000/asyncrun.vim'
+    " Status Line
+    Plug 'vim-airline/vim-airline'
+    " FZF
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+    " Git
+    Plug 'airblade/vim-gitgutter'
+    Plug 'tpope/vim-fugitive'
+    Plug 'junegunn/gv.vim'
+    " Terminal
+    Plug 'voldikss/vim-floaterm'
+    " See what keys do like in emacs
+    Plug 'liuchengxu/vim-which-key'
+    " Snippets
+    Plug 'honza/vim-snippets'
+    " Auto change html tags
+    Plug 'AndrewRadev/tagalong.vim'
+    " Markdown Preview
+    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+    " Colorizer
+    Plug 'norcalli/nvim-colorizer.lua'
+    " Rainbow brackets
+    Plug 'luochen1990/rainbow'
+    Plug 'terryma/vim-multiple-cursors'
+    " highlight all matches under cursor
+    Plug 'RRethy/vim-illuminate'
+    " Start screen
+    Plug 'mhinz/vim-startify'
+    " Intuitive buffer closing
+    Plug 'moll/vim-bbye'    
+    " window swapping
+    Plug 'wesQ3/vim-windowswap'
+    " Find and Replace
+    Plug 'brooth/far.vim'
+    " Styled components
+ 
 " Pretty Dress
 Plug 'bling/vim-bufferline'
 Plug 'bpietravalle/vim-bolt'
@@ -274,10 +345,10 @@ Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'kevinhwang91/rnvimr'
 Plug 'airblade/vim-rooter'
 Plug 'pechorin/any-jump.vim'
-
+Plug 'joshdick/onedark.vim'
 " Taglist
 Plug 'liuchengxu/vista.vim'
-
+Plug 'glacambre/firenvim'
 " Debugger
 " Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c --enable-python --enable-go'}
 
@@ -383,6 +454,7 @@ Plug 'rhysd/clever-f.vim'
 Plug 'chrisbra/NrrwRgn'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'jszakmeister/markdown2ctags'
+Plug 'liuchengxu/space-vim-dark'
 " For general writing
 " Plug 'junegunn/goyo.vim'
 "Plug 'reedes/vim-wordy'
@@ -390,8 +462,9 @@ Plug 'jszakmeister/markdown2ctags'
 Plug 'vim-airline/vim-airline'
 Plug 'connorholyday/vim-snazzy'
 
-
-
+Plug 'Shougo/defx.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
 " File navigation
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -411,7 +484,7 @@ Plug 'mbbill/undotree/'
 " Other visual enhancement
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'itchyny/vim-cursorword'
-
+Plug 'morhetz/gruvbox'
 " Git
 Plug 'rhysd/conflict-marker.vim'
 Plug 'tpope/vim-fugitive'
@@ -497,7 +570,6 @@ autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownCli
 " experimental
 set lazyredraw
 "set regexpengine=1
-map aa :undo<CR>
 " ===
 " Use this option to define the table corner character
 let g:table_mode_corner = '|'
@@ -1926,10 +1998,15 @@ let g:markdown_quote_syntax_filetypes = {
 " Add code blocks
 
 
+map <C-z> :undo<CR>
+imap <C-z> :undo<CR>
+imap <C-y> :redo<CR>
+map <C-y> :redo<CR>
 
-
-
-" Each codeblock is defined as:
+noremap <C-y> :redo<CR>
+noremap Y "+y
+map Y "+y
+"Each codeblock is defined as:
 "
 "    'codeblock[0].filetype.codeblock[1]<code lines>codeblock[2]'
 "
@@ -1938,6 +2015,126 @@ let g:markdown_quote_syntax_filetypes = {
 "    any codes
 "    ...
 "    {% endhighlight %}
-
+set clipboard=unnamedplus
 " Add other file types in which quote syntax should be on.
 let g:markdown_quote_syntax_on_filetypes = ['text']
+autocmd BufNewFile *.cpp exec ":call CppInit()"
+func CppInit()
+  if expand("%:e") == "cpp"
+    call setline(1,"/*")
+    call setline(2,"*******************************************************************")
+    call setline(3,"Author:                周冠男")
+    call setline(4,"Date:                  ".strftime("%Y-%m-%d"))
+    call setline(5,"FileName：             ".expand("%"))
+    call setline(6,"Copyright (C):         ".strftime("%Y")." All rights reserved")
+    call setline(7,"*******************************************************************")
+    call setline(8,"*/")
+    call setline(9,"#include<iostream>")
+    call setline(10,"using namespace std;")
+    call setline(11,"int main(){")
+    call setline(12,"  ")
+    call setline(13,"  return 0;")
+    call setline(14,"}")
+  endif
+endfunc
+" set to 1, nvim will open the preview window after entering the markdown buffer
+" default: 0
+let g:mkdp_auto_start = 1
+
+" set to 1, the nvim will auto close current preview window when change
+" from markdown buffer to another buffer
+" default: 1
+let g:mkdp_auto_close = 1
+
+" set to 1, the vim will refresh markdown when save the buffer or
+" leave from insert mode, default 0 is auto refresh markdown as you edit or
+" move the cursor
+" default: 0
+let g:mkdp_refresh_slow = 0
+
+" set to 1, the MarkdownPreview command can be use for all files,
+" by default it can be use in markdown file
+" default: 0
+let g:mkdp_command_for_global = 0
+
+" set to 1, preview server available to others in your network
+" by default, the server listens on localhost (127.0.0.1)
+" default: 0
+let g:mkdp_open_to_the_world = 0
+
+" use custom IP to open preview page
+" useful when you work in remote vim and preview on local browser
+" more detail see: https://github.com/iamcco/markdown-preview.nvim/pull/9
+" default empty
+let g:mkdp_open_ip = ''
+
+" specify browser to open preview page
+" default: ''
+let g:mkdp_browser = 'google-chrome-stable'
+
+" set to 1, echo preview page url in command line when open preview page
+" default is 0
+let g:mkdp_echo_preview_url = 0
+
+" a custom vim function name to open preview page
+" this function will receive url as param
+" default is empty
+let g:mkdp_browserfunc = ''
+
+" options for markdown render
+" mkit: markdown-it options for render
+" katex: katex options for math
+" uml: markdown-it-plantuml options
+" maid: mermaid options
+" disable_sync_scroll: if disable sync scroll, default 0
+" sync_scroll_type: 'middle', 'top' or 'relative', default value is 'middle'
+"   middle: mean the cursor position alway show at the middle of the preview page
+"   top: mean the vim top viewport alway show at the top of the preview page
+"   relative: mean the cursor position alway show at the relative positon of the preview page
+" hide_yaml_meta: if hide yaml metadata, default is 1
+" sequence_diagrams: js-sequence-diagrams options
+" content_editable: if enable content editable for preview page, default: v:false
+" disable_filename: if disable filename header for preview page, default: 0
+let g:mkdp_preview_options = {
+    \ 'mkit': {},
+    \ 'katex': {},
+    \ 'uml': {},
+    \ 'maid': {},
+    \ 'disable_sync_scroll': 0,
+    \ 'sync_scroll_type': 'middle',
+    \ 'hide_yaml_meta': 1,
+    \ 'sequence_diagrams': {},
+    \ 'flowchart_diagrams': {},
+    \ 'content_editable': v:false,
+    \ 'disable_filename': 0
+    \ }
+
+" use a custom markdown style must be absolute path
+" like '/Users/username/markdown.css' or expand('~/markdown.css')
+let g:mkdp_markdown_css = ''
+
+" use a custom highlight style must absolute path
+" like '/Users/username/highlight.css' or expand('~/highlight.css')
+let g:mkdp_highlight_css = ''
+
+" use a custom port to start server or random for empty
+let g:mkdp_port = ''
+
+" preview page title
+" ${name} will be replace with the file name
+let g:mkdp_page_title = '「${name}」'
+
+" recognized filetypes
+" these filetypes will have MarkdownPreview... commands
+let g:mkdp_filetypes = ['markdown']
+autocmd BufNewFile * normal G'
+vmap <C-c> "+y
+imap <C-p> :"+p<CR>
+map <C-p> "+p
+set clipboard+=unnamedplus
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+noremap <C-t> :sp<CR>:res 18<CR>:term<CR>
+colorscheme space-vim-dark
+hi Normal     ctermbg=NONE guibg=NONE
+hi LineNr     ctermbg=NONE guibg=NONE
+hi SignColumn ctermbg=NONE guibg=NONE
